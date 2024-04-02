@@ -29,5 +29,6 @@ INSERT ALL
 	INTO PERSON VALUES('이씨', 30)
 SELECT * FROM DUAL;
 
+--학생 테이블 데이터 3건 등록하는 INSERT문 작성
 
 
