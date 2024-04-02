@@ -85,8 +85,22 @@ SELECT * FROM PERSON WHERE AGE IN(30, 33, 35);
 SELECT * FROM PERSON WHERE PNAME = '홍길동';
 SELECT * FROM PERSON WHERE PNAME LIKE '홍길동';
 --고정길이 문자열을 비교 했을때
-SELECT * FROM NEW_PERSON WHERE PNAME = '한미연';
-SELECT * FROM NEW_PERSON WHERE PNAME LIKE '한미연                     ';
+SELECT * FROM NEW_PERSON 
+WHERE PNAME = '한미연'; --TRUE
+SELECT * FROM NEW_PERSON 
+WHERE PNAME LIKE '한미연'; --전체비교로 하기떄문에 FALSE
+-- % 와일드 카드 문자, 글자개수가 0개 이상 올수 있다.
+--성이 김씨로 시작하는 사람을 조회
+SELECT * FROM PERSON WHERE PNAME LIKE '김%';
+SELECT * FROM PERSON WHERE PNAME = '김%';
+--이름에 '미' 가 들어가는 사람을 조회
+SELECT * FROM PERSON WHERE PNAME LIKE '%미%';
+--이름이 '민'으로 끝나는 사람을 조회
+SELECT * FROM PERSON WHERE PNAME LIKE '%민';
+-- _ 와일드카드 문자 1글자
+SELECT * FROM PERSON WHERE PNAME LIKE '김__';
+SELECT * FROM PERSON WHERE PNAME LIKE '김_';
+
 
 
 
