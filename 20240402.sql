@@ -15,6 +15,11 @@ CREATE TABLE PERSON(
 	PNAME VARCHAR2(30),
 	AGE NUMBER(3)
 );
+
+CREATE TABLE NEW_PERSON(
+	PNAME CHAR(30),
+	AGE NUMBER(3)
+);
 --DML(데이터 조작어)
 --	INSERT, DELETE, UPDATE, SELECT
 
@@ -67,7 +72,21 @@ SELECT DISTINCT STD_MAJOR FROM NEW_STUDENT;
 --조건절
 --관계연산자 : > < >= <= = <>
 --논리연산자 : NOT, AND, OR
-
+--나이가 30세 이상인 사람만 조회
+SELECT * FROM PERSON WHERE AGE >= 30;
+--나이가 30세가 아닌 사람만 조회 != <>
+SELECT * FROM PERSON WHERE AGE != 30;
+--나이가 30대인 사람만 조회
+SELECT * FROM PERSON WHERE AGE >= 30 AND AGE <= 39;
+SELECT * FROM PERSON WHERE AGE BETWEEN 30 AND 39;
+--컬럼 IN(....) 해당 컬럼의 값이 IN 안에 존재하면 true, 아니면 false 
+SELECT * FROM PERSON WHERE AGE IN(30, 33, 35);
+--이름이 홍길동인 사람을 조회
+SELECT * FROM PERSON WHERE PNAME = '홍길동';
+SELECT * FROM PERSON WHERE PNAME LIKE '홍길동';
+--고정길이 문자열을 비교 했을때
+SELECT * FROM NEW_PERSON WHERE PNAME = '한미연';
+SELECT * FROM NEW_PERSON WHERE PNAME LIKE '한미연                     ';
 
 
 
