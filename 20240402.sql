@@ -100,6 +100,13 @@ SELECT * FROM PERSON WHERE PNAME LIKE '%민';
 -- _ 와일드카드 문자 1글자
 SELECT * FROM PERSON WHERE PNAME LIKE '김__';
 SELECT * FROM PERSON WHERE PNAME LIKE '김_';
+--학점이 2.5이상 3.5이하인 학생 목록을 조회
+
+--학과명이 경제학과인 학생만 조회
+
+--학생 이름이 수로 끝나는 학생만 조회
+
+--학과명에 경이 들어가는 학생만 조회
 
 
 
