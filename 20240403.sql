@@ -56,5 +56,11 @@ SELECT INSTR('HELLO WORLD',' ') FROM DUAL;
 
 --문자열 바꾸기
 SELECT REPLACE('AAAAAAABBBBBCCCC','B','F') FROM DUAL;
+--학생 테이블의 이름 데이터를 학과명을 공학, 학으로 변경하는 UPDATE문을 작성
+UPDATE NEW_STUDENT SET STD_MAJOR = REPLACE(STD_MAJOR,'공학','학')
+WHERE INSTR(STD_MAJOR,'공학') <> 0;
+
+
+
 
 
