@@ -163,7 +163,11 @@ SELECT NVL(NULL,'널값'), NVL('100','널값') FROM DUAL;
 --첫번쨰 값이 NULL일떄, 3번째값을 리턴, NULL이 아니면 두번째 값을 리턴
 SELECT NVL2(NULL,'널이 아닌 값','널 값'), NVL2('a','널이 아닌 값','널 값')
 FROM DUAL;
-
+-- 첫번째 값을 가지고 매칭 되는 값의 오른쪽에 있는 데이터를 리턴
+-- 매칭 되는 값이 없으면 마지막 값을 리턴
+SELECT DECODE(1,1,'A',2,'B','C') FROM DUAL; 
+SELECT DECODE(2,1,'A',2,'B','C') FROM DUAL; 
+SELECT DECODE(4,1,'A',2,'B',3,'C',4,'D','F') FROM DUAL; 
 
 
 
