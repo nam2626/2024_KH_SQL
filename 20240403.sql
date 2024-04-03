@@ -37,7 +37,24 @@ SELECT 'DROP TABLE ' || TABLE_NAME || ';' FROM USER_TABLES;
 SELECT SUBSTR('1234567890',5,4) FROM DUAL;
 SELECT SUBSTR('안녕하세요',2,3) FROM DUAL;
 --주민등록번호 '841113-1246121' --> '841113-1******' 마스킹 처리
-SELECT SUBSTR('841113-1246121',,) FROM DUAL;
+SELECT SUBSTR('841113-1246121',1,8) || '******' FROM DUAL;
+--PERSON 테이블의 전체 데이터 조회시 이름 가운에데 * 마스킹 처리해서 조회
+--SUBSTR, LENGTH
+SELECT SUBSTR(PNAME,1,1) || '*' || SUBSTR(PNAME,LENGTH(PNAME),1) AS PNAME,
+	AGE FROM PERSON;
+--바이트 단위로 문자열 추출
+SELECT SUBSTRB('안녕하세요',2,3) FROM DUAL;
+SELECT SUBSTRB('ABCDEFG',2,3) FROM DUAL;
 
+--문자열 검색 INSTR - 검색결과가 있으면 0보다 큰 값, 검색 결과가 없으면 0
+SELECT INSTR('abcdefg','cd') FROM DUAL;
+SELECT INSTR('abcdefg','cdf') FROM DUAL;
+--HELLO WORLD 문자열에 공백이 있는지 체크
+SELECT INSTR('HELLO WORLD',' ') FROM DUAL;
+--테이블 NAME 컬럼에 공백을 넣지 않는 조건
+--CHECK(INSTR(NAME,' ') = 0) -->이런 형태로 테이블의 제약조건에 들어감
+
+--문자열 바꾸기
+SELECT REPLACE('AAAAAAABBBBBCCCC','B','F') FROM DUAL;
 
 
