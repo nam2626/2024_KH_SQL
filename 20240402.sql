@@ -50,7 +50,7 @@ VALUES('A20231111','김철수','과장','회계부',45000000,'2023-09-12');
 INSERT INTO EMPLOYEE
 VALUES('A20232223','김영희','대리','회계부','45000000','2023-09-12');
 INSERT INTO EMPLOYEE
-VALUES(202322231,'김영희','대리','회계부','45000000','2023-09-12');
+VALUES(202322232,'김영희','대리','회계부','45000000','2023-09-12');
 INSERT INTO EMPLOYEE
 VALUES(202322231,김영희,'대리','회계부','45000000','2023-09-12');
 
@@ -80,6 +80,7 @@ SELECT * FROM PERSON WHERE AGE != 30;
 SELECT * FROM PERSON WHERE AGE >= 30 AND AGE <= 39;
 SELECT * FROM PERSON WHERE AGE BETWEEN 30 AND 39;
 --컬럼 IN(....) 해당 컬럼의 값이 IN 안에 존재하면 true, 아니면 false 
+--비교하는 연산자는 = 으로 비교한다.
 SELECT * FROM PERSON WHERE AGE IN(30, 33, 35);
 --이름이 홍길동인 사람을 조회
 SELECT * FROM PERSON WHERE PNAME = '홍길동';
@@ -142,15 +143,20 @@ CREATE TABLE CAR(
 	CAR_PRICE NUMBER(5)
 );
 --MOCKAROO에서 샘플 데이터 작성하여 CAR 테이블에 저장하세요.
-
+SELECT * FROM car;
 --자동차 테이블에서 제조사가 BMW인 자동차를 조회
-
+SELECT * FROM CAR WHERE CAR_MAKER LIKE 'BMW';
 --자동차 테이블에서 제조사가 BMW이거나 제조사가 Mercedes인 자동차를 조회
-
+SELECT * FROM CAR WHERE CAR_MAKER IN('BMW','Mercedes-Benz');
+SELECT * FROM CAR 
+WHERE CAR_MAKER LIKE 'BMW' OR CAR_MAKER LIKE 'Mercedes-Benz';
 --자동차 테이블에서 제조사가 BMW이거나 Mercedes, Audi인 자동차를 조회
-
+SELECT * FROM CAR WHERE CAR_MAKER IN('BMW','Mercedes-Benz','Audi');
+SELECT * FROM CAR 
+WHERE CAR_MAKER LIKE 'BMW' OR CAR_MAKER LIKE 'Mercedes-Benz'
+OR CAR_MAKER LIKE 'Audi';
 --자동차 테이블에서 자동차금액이 7000이상 9000이하인 자동차를 조회
-
+SELECT * FROM CAR WHERE CAR_PRICE BETWEEN 7000 AND 9000;
 --자동차 테이블에서 제조사가 Kia이면서 자동차금액이 7000이상 9000이하인 자동차를 조회
 
 --자동차 테이블에서 자동차번호가 3번째 자리가 8, 4번째 자리가 9인 자동차를 조회
