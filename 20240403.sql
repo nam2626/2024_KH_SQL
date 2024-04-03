@@ -153,6 +153,16 @@ SELECT ROWNUM , P.* FROM
 -- 현재 행을 기준으로 다음 위치에 해당하는 값을 읽어오는 함수
 SELECT LEAD(PNAME) OVER(ORDER BY PNAME), PNAME, AGE FROM PERSON;
 SELECT LEAD(PNAME,2,'다음 데이터 없음') OVER(ORDER BY PNAME), PNAME, AGE FROM PERSON;
+-- 현재 행을 기준으로 이전 위치에 해당하는 값을 읽어오는 함수
+SELECT LAG(PNAME) OVER(ORDER BY PNAME), PNAME, AGE FROM PERSON;
+SELECT LAG(PNAME,2,'다음 데이터 없음') OVER(ORDER BY PNAME), PNAME, AGE FROM PERSON;
+
+--NULL 처리하는 함수
+--첫번째 값이 NULL일때 두번째 값을 리턴, NULL이 아니면 그냥 현재값을 리턴
+SELECT NVL(NULL,'널값'), NVL('100','널값') FROM DUAL;
+--첫번쨰 값이 NULL일떄, 3번째값을 리턴, NULL이 아니면 두번째 값을 리턴
+SELECT NVL2(NULL,'널이 아닌 값','널 값'), NVL2('a','널이 아닌 값','널 값')
+FROM DUAL;
 
 
 
