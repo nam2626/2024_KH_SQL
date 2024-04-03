@@ -99,6 +99,20 @@ SELECT MOD(6,4) FROM DUAL;
 SELECT POWER(2,10) FROM DUAL;
 --TO_NUMBER('문자열') : 문자열을 숫자로 바꿔주는 함수
 SELECT '123' + 123, '123' / '2', TO_NUMBER('123') / 2  FROM DUAL;
+-------------------------------------------------------------------
+--날짜시간
+SELECT SYSDATE FROM DUAL;
+--오라클에서 지정된 현재 날짜 시간의 출력 포멧을 변경 - 현재 연결된 세션에서만 가능
+ALTER SESSION SET nls_date_format = 'YYYY-MM-DD HH24:MI:SS';
+ALTER SESSION SET nls_date_format = 'YY/MM/DD';
+--TO_CHAR(데이터, '형식') 문자열로 변환
+SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD HH:MI:SS') FROM DUAL; --HH 12시간 기준
+SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') FROM DUAL; --HH24 24시간 기준
+SELECT TO_CHAR(SYSDATE, 'MON MONTH DY DAY') FROM DUAL;
+SELECT TO_CHAR(SYSDATE, 'MON MONTH DY DAY','NLS_DATE_LANGUAGE=ENGLISH') FROM DUAL;
+
+
+
 
 
 
