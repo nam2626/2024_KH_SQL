@@ -171,10 +171,14 @@ SELECT DECODE(4,1,'A',2,'B',3,'C',4,'D','F') FROM DUAL;
 
 --학생 테이블에서 학생정보 조회시 
 --학번의 경우 앞에 4자리만 표현하고 나머지 4자리는 마스킹 처리 해서 조회
-
+SELECT SUBSTR(STD_NO,1,4) || '****' AS STD_NO , STD_NEW_NAME, STD_MAJOR, STD_SCORE FROM NEW_STUDENT;
+SELECT CONCAT(SUBSTR(STD_NO,1,4), '****') AS STD_NO , STD_NEW_NAME, STD_MAJOR, STD_SCORE FROM NEW_STUDENT;
+SELECT RPAD(SUBSTR(STD_NO,1,4),8,'*') AS STD_NO , STD_NEW_NAME, STD_MAJOR, STD_SCORE FROM NEW_STUDENT;
 --평점을 기준으로 학생들 성적 순위를 출력, 성적순은 내림차순으로 처리
 --평점 출력시 3.20 형식으로 출력이 되게끔 처리
-
+SELECT DENSE_RANK() OVER(ORDER BY STD_SCORE DESC) AS RANK ,
+STD_NO , STD_NEW_NAME , STD_MAJOR , TO_CHAR(STD_SCORE,'0.00') AS STD_SCORE  
+FROM NEW_STUDENT;
 --사원 테이블에서 데이터 조회시 연봉 순위를 조회, 입사일은 입사년도만 출력
 --연봉을 출력시 천단위 기호가 붙게끔 처리
 
