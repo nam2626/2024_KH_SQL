@@ -65,5 +65,16 @@ SELECT SUBSTR(STD_NO,1,4), STD_MAJOR,
 FROM STUDENT
 GROUP BY SUBSTR(STD_NO,1,4), STD_MAJOR;
 
+--입학한 년도별, 인원수, 평점 평균, 평점 총합를 조회하세요.
+SELECT SUBSTR(STD_NO,1,4),
+	COUNT(*) AS STUDENT_COUNT, AVG(STD_SCORE) AS AVG_SCORE,
+	SUM(STD_SCORE) AS SUM_SCORE
+FROM STUDENT
+GROUP BY SUBSTR(STD_NO,1,4) ;
+--학과별로 인원수, 평점 평균, 평점 총합를 조회하세요.
 
+--학과별, 성별로 인원수, 평점 평균, 평점 총합를 조회하세요.
 
+--성별로 인원수, 평점 평균, 평점 총합를 조회하세요.
+
+--전체 인원수, 평점 평균, 평점 총합를 조회하세요.
