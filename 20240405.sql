@@ -82,9 +82,10 @@ FROM (SELECT DISTINCT STD_MAJOR FROM STUDENT);
 
 --학생 테이블에 학과번호 컬럼을 추가
 ALTER TABLE STUDENT ADD MAJOR_NO CHAR(2);
-
+--학생 테이블에 학과번호 업데이트 - 학과 테이블에 있는 데이터를 서브쿼리로 조회해서
 UPDATE STUDENT SET MAJOR_NO = 
 (SELECT MAJOR_NO FROM MAJOR WHERE MAJOR_NAME LIKE STD_MAJOR);
+--학생 테이블에 학과명 컬럼을 삭제
 
 
 
