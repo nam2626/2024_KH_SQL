@@ -248,7 +248,8 @@ SELECT CM.CAR_MAKER_NAME, COUNT(*) AS MAKER_COUNT,
 MAX(C.CAR_PRICE) AS MAX_PRICE, MIN(C.CAR_PRICE) AS MIN_PRICE
 FROM CAR C INNER JOIN CAR_MAKER CM
 ON C.CAR_MAKER_CODE = CM.CAR_MAKER_CODE
-GROUP BY CM.CAR_MAKER_NAME; 
+GROUP BY CM.CAR_MAKER_NAME;
+--그룹 함수 사용
 --자동차 제조사별, 제조년도별, 출시된 제품 개수를 조회 
 --단, 금액이 10000이상인 것들만 대상으로 잡음
 
@@ -259,9 +260,12 @@ GROUP BY CM.CAR_MAKER_NAME;
 --판매 번호, 판매된 모델명, 판매일, 판매개수, 판매금액
 --외부 조인을 이용해서 모든 자동차 데이터는 조회
 
---판매 연도별, 제조사별, 판매 대수 총합, 판매금액 총합, 판매금액 평균을 조회
-
---판매 연도/월별, 제조사별, 판매 대수 총합, 판매금액 총합, 판매금액 평균을 조회
-
 --한번도 판매되지 않은 자동차 목록 조회
 --자동차 번호, 자동차 모델명, 제조사명, 제조년도, 금액
+
+--그룹 함수 사용
+--판매 연도별, 제조사별, 판매 대수 총합, 판매금액 총합, 판매금액 평균을 조회
+
+--그룹 함수 사용
+--판매 연도/월별, 제조사별, 판매 대수 총합, 판매금액 총합, 판매금액 평균을 조회
+
