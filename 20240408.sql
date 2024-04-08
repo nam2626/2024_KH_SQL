@@ -139,11 +139,77 @@ ADD CONSTRAINT CHECK_NAME_LENGTH CHECK(LENGTH(STD_NAME) <= 6);
 INSERT INTO STUDENT 
 VALUES('11112222','김철수안녕하',3.6,'M','L0');
 
+------------------------------------------------------------------------
+--정렬 ORDER BY 컬럼명 [ASC | DESC], 컬럼명 [ASC | DESC]....;
+--ASC : 오름차순(기본값), DESC : 내림차순
 
+--PERSON 테이블 전체 조회시 나이 기준으로 정렬
+SELECT * FROM PERSON ORDER BY AGE; --오름차순
+SELECT * FROM PERSON ORDER BY AGE DESC; --내림차순
 
+--학생 테이블 조회시
+--점수 기준으로 내림차순 정렬, 학번 기준으로 내림차순 정렬
+SELECT * FROM STUDENT
+ORDER BY STD_SCORE DESC, STD_NO DESC;
 
+SELECT ROWNUM, S.* FROM STUDENT S
+ORDER BY S.STD_SCORE DESC;
 
+SELECT ROW_NUMBER() OVER(ORDER BY S.STD_SCORE DESC), S.* FROM STUDENT S;
 
+--------------------------------------------------------------------------
+--서브쿼리(Sub Query)
+--	하나의 SQL문에 또 다른 SQL문이 있는 형태
+--	단일 행, 멀티 행, 다중 컬럼, 스칼라(컬럼에 서브쿼리가 들어가는 형태)
+
+-- 조건식에 들어가는 서브쿼리
+-- 평점이 최고점에 해당하는 학생 정보를 조회
+--평점이 최대값인 점수를 조회
+SELECT MAX(STD_SCORE) FROM STUDENT;
+--서브쿼리를 조건식에 적용해서 조회
+SELECT * FROM STUDENT 
+WHERE STD_SCORE = (SELECT MAX(STD_SCORE) FROM STUDENT);
+-- 평점이 평균 이상인 학생 정보를 조회
+SELECT * FROM STUDENT 
+WHERE STD_SCORE >= (SELECT AVG(STD_SCORE) FROM STUDENT);
+--평점이 최고점인 학생과, 최저점인 학생을 조회
+--조회할 컬럼은 학번, 이름, 학과명, 평점, 성별
+SELECT * FROM STUDENT
+WHERE STD_SCORE = (SELECT MAX(STD_SCORE) FROM STUDENT) OR
+STD_SCORE = (SELECT MIN(STD_SCORE) FROM STUDENT);
+
+SELECT * FROM STUDENT
+WHERE STD_SCORE IN(
+(SELECT MAX(STD_SCORE) FROM STUDENT),
+(SELECT MIN(STD_SCORE) FROM STUDENT)
+);
+
+--평균 이하인 학생들의 평점을 0.5점 증가
+UPDATE STUDENT SET STD_SCORE = STD_SCORE  + 0.5
+WHERE STD_SCORE <= (SELECT AVG(STD_SCORE) FROM STUDENT);
+
+--장학금을 받는 학생들만조회, 단, IN 서브쿼리를 활용해서 조회
+SELECT * FROM STUDENT
+WHERE STD_NO IN(SELECT STD_NO FROM STUDENT_SCHOLARSHIP);
+
+--장학금을 못 받는 학생들만조회, 단, IN 서브쿼리를 활용해서 조회
+--불일치 쿼리
+SELECT * FROM STUDENT
+WHERE STD_NO NOT IN(SELECT STD_NO FROM STUDENT_SCHOLARSHIP);
+
+--학과별로 최고점을 가진 학생들을 조회
+--1. 학과별로 최고점을 가진 점수를 조회, 학과 번호, 최고점 조회
+SELECT MAJOR_NO, MAX(STD_SCORE)
+FROM STUDENT
+GROUP BY MAJOR_NO;
+
+--2. 서브 쿼리를 이용해서 다중 컬럼 비교
+SELECT * FROM STUDENT
+WHERE (MAJOR_NO, STD_SCORE) IN(
+	SELECT MAJOR_NO, MAX(STD_SCORE)
+	FROM STUDENT
+	GROUP BY MAJOR_NO
+);
 
 
 
