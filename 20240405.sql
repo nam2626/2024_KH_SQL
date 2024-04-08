@@ -252,16 +252,31 @@ GROUP BY CM.CAR_MAKER_NAME;
 --그룹 함수 사용
 --자동차 제조사별, 제조년도별, 출시된 제품 개수를 조회 
 --단, 금액이 10000이상인 것들만 대상으로 잡음
+SELECT CM.CAR_MAKER_NAME, C.CAR_MAKE_YEAR, COUNT(*) AS CAR_COUNT
+FROM CAR C INNER JOIN CAR_MAKER CM
+ON C.CAR_MAKER_CODE = CM.CAR_MAKER_CODE
+WHERE C.CAR_PRICE >= 10000
+GROUP BY CM.CAR_MAKER_NAME, C.CAR_MAKE_YEAR
+ORDER BY CM.CAR_MAKER_NAME ASC, C.CAR_MAKE_YEAR DESC;
 
 --자동차 판매 정보 조회
 --판매 번호, 판매된 모델명, 판매일, 판매개수, 판매금액
-
---자동차 판매 정보 조회
---판매 번호, 판매된 모델명, 판매일, 판매개수, 판매금액
---외부 조인을 이용해서 모든 자동차 데이터는 조회
+SELECT 
+	CS.CAR_SELL_NO, C.CAR_NAME, CS.CAR_SELL_DATE,
+	CS.CAR_SELL_EA, CS.CAR_SELL_PRICE
+FROM CAR C INNER JOIN CAR_SELL CS 
+ON C.CAR_ID = CS.CAR_ID;
 
 --한번도 판매되지 않은 자동차 목록 조회
 --자동차 번호, 자동차 모델명, 제조사명, 제조년도, 금액
+SELECT 
+	C.CAR_ID, C.CAR_NAME, CM.CAR_MAKER_NAME, 
+	C.CAR_MAKE_YEAR, C.CAR_PRICE
+FROM CAR C LEFT OUTER JOIN CAR_SELL CS 
+ON C.CAR_ID = CS.CAR_ID
+INNER JOIN CAR_MAKER CM
+ON C.CAR_MAKER_CODE = CM.CAR_MAKER_CODE
+WHERE CS.CAR_SELL_NO IS NULL;
 
 --그룹 함수 사용
 --판매 연도별, 제조사별, 판매 대수 총합, 판매금액 총합, 판매금액 평균을 조회
