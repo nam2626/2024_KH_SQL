@@ -352,10 +352,18 @@ GROUP BY TO_CHAR(CS.CAR_SELL_DATE,'MM'), CS.CAR_ID)
 GROUP BY MONTH);
 
 --판매가 한번도 안된 자동차들 목록 조회 not in 사용
-
+SELECT C.CAR_NAME
+FROM CAR C
+WHERE C.CAR_ID NOT IN (SELECT DISTINCT CS.CAR_ID FROM CAR_SELL CS);
 --판매가 안된 자동차들을 기준으로 금액이 평균 이상인 자동차 조회
 
---판매가 안된 자동차들을 기준으로 판매가 제일 안된 제조사 조회
+--판매가 안된 자동차들을 기준으로 제일 많이 안팔린 모델을 보유 중인 제조사 조회
+
+--
+
+
+
+
 
 
 
