@@ -381,7 +381,8 @@ GROUP BY C.CAR_MAKER_CODE
 ORDER BY CAR_COUNT DESC) CC JOIN CAR_MAKER CM
 ON CC.CAR_MAKER_CODE = CM.CAR_MAKER_CODE)
 WHERE RANK_NO = 1;
---
+----판매가 안된 자동차들을 기준으로 금액이 평균 이상인 자동차 금액을 30% 할인, 소수점은 절삭
+
 
 
 
