@@ -308,6 +308,18 @@ FROM
 	AVG(C.CAR_PRICE) AS AVG_PRICE
 FROM CAR C
 GROUP BY C.CAR_MAKER_CODE) C;
+
+--학생정보 조회시 학번, 이름, 학과명, 평점, 성별
+--학과명은 서브쿼리를 이용해서 조회
+SELECT S.STD_NO, S.STD_NAME, 
+(
+	SELECT M.MAJOR_NAME 
+	FROM MAJOR M 
+	WHERE M.MAJOR_NO = S.MAJOR_NO
+) AS MAJOR_NAME,
+S.STD_SCORE, S.STD_GENDER 
+FROM STUDENT S;
+
 --월별 최다 판매 차량 대수를 조회
 --1. 월별, 차량별 총 판매 대수 조회 (month, car_no, sum_ea)
 
