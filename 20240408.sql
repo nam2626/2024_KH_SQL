@@ -322,7 +322,10 @@ FROM STUDENT S;
 
 --월별 최다 판매 차량 대수를 조회
 --1. 월별, 차량별 총 판매 대수 조회 (month, car_no, sum_ea)
-
+SELECT TO_CHAR(CS.CAR_SELL_DATE,'MM') AS MONTH, CS.CAR_ID,
+SUM(CS.CAR_SELL_EA) AS SUM_EA 
+FROM CAR_SELL CS
+GROUP BY TO_CHAR(CS.CAR_SELL_DATE,'MM'), CS.CAR_ID; 
 --2. 1번 데이터를 기준으로 월별 최다 판매대수를 구하면
 
 --3. 1번과 2번을 기준으로 월별 최다 판매 차량 대수를 조회
