@@ -276,8 +276,22 @@ WHERE MONEY_RANK <= 3;
 
 ----------------------------------------------------
 ----최대 금액과 최소 금액를 가진 차량의 정보를 조회
+SELECT MAX(CAR_PRICE) FROM CAR;
+SELECT MIN(CAR_PRICE) FROM CAR;
 
---제조사별 차량 종류 개수, 평균 정가를 조회
+SELECT * FROM CAR
+WHERE CAR_PRICE IN(
+(SELECT MAX(CAR_PRICE) FROM CAR),
+(SELECT MIN(CAR_PRICE) FROM CAR)
+)
+
+SELECT * FROM CAR
+WHERE 
+CAR_PRICE = (SELECT MAX(CAR_PRICE) FROM CAR)
+OR
+CAR_PRICE = (SELECT MIN(CAR_PRICE) FROM CAR);
+
+ --제조사별 차량 종류 개수, 평균 정가를 조회
 --제조사명, 개수, 정가 평균 컬럼
 
 --월별 최다 판매 차량 대수를 조회
