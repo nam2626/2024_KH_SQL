@@ -175,12 +175,34 @@ FOREIGN KEY(BOARD_NO) REFERENCES BOARD(BOARD_NO)
 ON DELETE CASCADE;
 
 --게시판 글번호, 댓글 번호를 관리할 시퀸스
+--글번호 : 490번부터 시작
+--board_seq 시퀸스 작성
+CREATE SEQUENCE BOARD_SEQ
+START WITH 490;
+SELECT BOARD_SEQ.NEXTVAL FROM DUAL;
+SELECT BOARD_SEQ.CURRVAL FROM DUAL;
+--댓글 번호 시퀸스
+CREATE SEQUENCE BOARD_COMMENT_SEQ;
 
 --샘플데이터
-
 --페이징, 조회, 서브쿼리, 그룹함수, 조인
+--전체 게시글 조회
+--글번호, 제목, 작성자(닉네임) 조회수, 작성일
+SELECT 
+	B.BOARD_NO, B.BOARD_TITLE, 
+	BM.BOARD_MEMBER_NICK, B.BOARD_COUNT, B.BOARD_WRITE_DATE  
+FROM BOARD B JOIN BOARD_MEMBER BM
+ON B.BOARD_MEMBER_ID = BM.BOARD_MEMBER_ID
+ORDER BY B.BOARD_NO DESC;
+
+--글 번호별 좋아요의 총합을 조회
+--글번호, 좋아요 총합
+
 
 --뷰
+
+
+
 
 
 
