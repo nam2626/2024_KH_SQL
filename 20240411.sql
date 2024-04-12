@@ -13,4 +13,27 @@ INSERT INTO GROUP_TEST VALUES('F',40);
 SELECT SUM(VAL), AVG(VAL), AVG(NVL(VAL,0)),COUNT(*),COUNT(VAL)
 FROM GROUP_TEST;
 -------------------------------------------------------------------
+-- 함수
+CREATE OR REPLACE FUNCTION GET_ODD_EVEN(N IN NUMBER)
+RETURN VARCHAR2
+IS
+	MSG VARCHAR2(100);
+BEGIN
+	IF N = 0 THEN 
+		MSG := '0입니다.';
+	ELSIF MOD(N,2) = 1 THEN
+		MSG := '홀수 입니다.';
+	ELSE
+		MSG := '짝수 입니다.';
+	END IF;
+	RETURN MSG;
+END;
+
+SELECT GET_ODD_EVEN(3), GET_ODD_EVEN(4), GET_ODD_EVEN(0) FROM DUAL;
+
+
+
+
+
+
 
