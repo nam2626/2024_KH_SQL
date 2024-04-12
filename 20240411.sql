@@ -189,7 +189,7 @@ END;
 CREATE OR REPLACE TRIGGER UPDATE_STUDENT
 AFTER
 INSERT OR UPDATE OR DELETE ON STUDENT
-FOR EACH ROW    
+FOR EACH ROW    `
 BEGIN 
     IF INSERTING THEN
         INSERT INTO DATA_LOG(LOG_DETAIL) 
@@ -208,6 +208,26 @@ BEGIN
     END IF;
     
 END;
+
+--함수 문제
+--자동차 제조사 명을 매개변수로 받아서 해당 자동차의 총 판매 대수를 리턴하는 함수
+
+--학생 테이블에 있는 데이터를 기준으로 평점의 최대값을 리턴하는 함수
+
+--학생 테이블에 있는 데이터를 기준으로 평점의 최소값을 리턴하는 함수
+
+--트리거
+--게시판 테이블에 게시글 등록한 사람과, 등록일시, 추가한 데이터 기록
+--게시판 테이블에 게시글 수정한 데이터의 수정일시, 변경 전후의 데이터를 기록
+--게시판 테이블에 게시글 삭제일시, 삭제한 게시글 번호
+
+
+
+
+
+
+
+
 
 
 
