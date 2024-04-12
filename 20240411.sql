@@ -134,7 +134,15 @@ BEGIN
 		TOTAL := TOTAL + I;
 		I := I + 1;
 	END LOOP;
+
+	TOTAL := 0;
+	I := 1;
 	
+	FOR I IN 1 .. NUM
+	LOOP
+		TOTAL := TOTAL + I;
+	END LOOP;
+
 	RETURN TOTAL;
 END;
 
