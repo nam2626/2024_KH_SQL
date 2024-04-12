@@ -125,6 +125,15 @@ BEGIN
 		I := I + 1;
 		EXIT WHEN I > NUM;
 	END LOOP;
+
+	TOTAL := 0;
+	I := 1;
+
+	WHILE(I <= NUM)
+	LOOP
+		TOTAL := TOTAL + I;
+		I := I + 1;
+	END LOOP;
 	
 	RETURN TOTAL;
 END;
