@@ -174,7 +174,39 @@ BEGIN
 	VALUES(:NEW.MAJOR_NO || '-' || :NEW.MAJOR_NAME);
 END;
 
-
+CREATE OR REPLACE TRIGGER DELETE_MAJOR
+AFTER
+	DELETE ON MAJOR
+FOR EACH ROW 
+BEGIN 
+	INSERT INTO DATA_LOG(LOG_DETAIL) 
+	VALUES(:OLD.MAJOR_NO || '-' || :OLD.MAJOR_NAME);
+END;
+--학생 테이블 트리거
+--수정 및 삭제가 발생했을때 해당 정보를 data_log 테이블 저장
+--수정되는 값이나 삭제되는 값을 메세지에 포함
+CREATE OR REPLACE TRIGGER UPDATE_STUDENT
+AFTER
+INSERT OR UPDATE OR DELETE ON STUDENT
+FOR EACH ROW    
+BEGIN 
+    IF INSERTING THEN
+        INSERT INTO DATA_LOG(LOG_DETAIL) 
+		VALUES(:NEW.STD_NO || ' - ' || :NEW.STD_NAME 
+		|| ' - ' || :NEW.STD_SCORE || ' - ' || :NEW.MAJOR_NO || ' - ' || 'INSERT');
+    ELSIF DELETING THEN
+        INSERT INTO DATA_LOG(LOG_DETAIL) 
+		VALUES(:OLD.STD_NO || ' - ' || :OLD.STD_NAME 
+		|| ' - ' || :OLD.STD_SCORE || ' - ' || :OLD.MAJOR_NO || ' - ' || 'DELETE');
+    ELSE
+        INSERT INTO DATA_LOG(LOG_DETAIL) 
+		VALUES(:OLD.STD_NO || ' - ' || :OLD.STD_NAME 
+		|| ' - ' || :OLD.STD_SCORE || ' - ' || :OLD.MAJOR_NO || ' - ' || '/' ||
+		:NEW.STD_NO || ' - ' || :NEW.STD_NAME 
+		|| ' - ' || :NEW.STD_SCORE || ' - ' || :NEW.MAJOR_NO || ' - ' || 'UPDATE');    
+    END IF;
+    
+END;
 
 
 
