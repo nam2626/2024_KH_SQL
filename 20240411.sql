@@ -185,6 +185,7 @@ END;
 --학생 테이블 트리거
 --수정 및 삭제가 발생했을때 해당 정보를 data_log 테이블 저장
 --수정되는 값이나 삭제되는 값을 메세지에 포함
+--INSERTING, UPDATING, DELETING
 CREATE OR REPLACE TRIGGER UPDATE_STUDENT
 AFTER
 INSERT OR UPDATE OR DELETE ON STUDENT
