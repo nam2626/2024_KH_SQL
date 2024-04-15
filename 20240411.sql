@@ -316,6 +316,51 @@ SELECT * FROM C##SCOTT.board;
 
 INSERT INTO "C##SCOTT".BOARD(BOARD_NO,BOARD_MEMBER_ID,BOARD_TITLE,BOARD_CONTENT,BOARD_COUNT)
 VALUES("C##SCOTT".BOARD_SEQ.NEXTVAL, 'gt1442','제목','내용',0);
+--------------------------------
+--프로시저
+--	sql 쿼리문으로 로직을 조합해서 사용하는 데이터베이스 코드
+--	sql문과 제어문을 이용해서 데이터를 검색, 삽입, 수정, 삭제를 할 수 있음,
+--	결과를 외부로 전달할 수도 있음
+--------------------------------
+--매개변수가 없을때
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE PROCEDURE PROCEDURE_EX1
+IS 
+	TEST_VAR VARCHAR2(100);
+BEGIN
+	TEST_VAR := 'AAAAA';
+	DBMS_OUTPUT.PUT_LINE(TEST_VAR);
+END;
+
+BEGIN
+	PROCEDURE_EX1();
+END;
+
+--매개변수 있을 경우
+CREATE OR REPLACE PROCEDURE PROCEDURE_EX2(
+	PID IN VARCHAR2,
+	NAME IN VARCHAR2,
+	AGE IN NUMBER
+) 
+IS
+	TEST_VAR VARCHAR2(100);
+BEGIN
+	TEST_VAR := 'AAAAAA';
+	DBMS_OUTPUT.PUT_LINE(TEST_VAR || ' ' || NAME || ' ' || AGE);	
+	INSERT INTO PERSON VALUES(PID,NAME,AGE);
+	COMMIT;
+END;
+
+BEGIN
+	PROCEDURE_EX2('0010','김철수',33);
+END;
+
+
+
+
+
+
 
 
 
