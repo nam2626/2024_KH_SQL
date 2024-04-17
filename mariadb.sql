@@ -255,7 +255,28 @@ where (s.major_no, s.std_score) in(
 select major_no, max(std_score) 
 from student group by major_no);
 
+---------------------------------------
+--postgreSQL
+---------------------------------------
+CREATE USER scott PASSWORD 'tiger' SUPERUSER;
+CREATE DATABASE SCOTT_DB WITH OWNER SCOTT ENCODING 'UTF8';
 
+GRANT ALL PRIVILEGES ON DATABASE scott_db TO scott;
+
+create table student(
+	std_no char(8) primary key,
+	std_name varchar(30),
+	major_no decimal(2) default 0,
+	std_score float
+);
+
+insert into student values('20201111','홍길동',3,2.4);
+insert into student values('20202222','김철수',1,3.4);
+insert into student values('20203333','황보원',4,4.4);
+insert into student values('20204444','이인수',5,1.5);
+insert into student values('20205555','박철수',2,3.6);
+
+select * from student;
 
 
 
